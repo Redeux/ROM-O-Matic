@@ -11,7 +11,9 @@ $(document).ready(function () {
   $('#MSSQL-add-button').on('click', addMSSQLRow);
   $('#Couchbase-add-button').on('click', addCouchbaseRow);
 
-  $(document).on('click', ".delete-row", deleteRow)
+  $(document).on('click', ".delete-row", deleteRow);
+
+  $(document).on('change', "input, select", setTdValue);
 });
 
 function addIntelVMRow() {
@@ -19,9 +21,9 @@ function addIntelVMRow() {
     .append(removeButton)
     .append(descriptionInput('frontend'))
     .append(regionSelect)
-    .append(instancesInput)
+    .append(quantityInput)
     .append($("<td>")
-      .addClass("operating-system")
+      .data('type', 'OS')
       .append($("<select>")
         .append($("<option>")
           .val('')
@@ -62,9 +64,9 @@ function addPowerVMRow() {
     .append(removeButton)
     .append(descriptionInput('backend'))
     .append(regionSelect)
-    .append(instancesInput)
+    .append(quantityInput)
     .append($("<td>")
-      .addClass("operating-system")
+      .data('type', 'OS')
       .append($("<select>")
         .append($("<option>")
           .val('')
@@ -102,9 +104,9 @@ function addContainerRow() {
     .append(removeButton)
     .append(descriptionInput('service'))
     .append(regionSelect)
-    .append(instancesInput)
+    .append(quantityInput)
     .append($("<td>")
-      .addClass("base-image")
+      .data('type', 'base-image')
       .append($("<select>")
         .append($("<option>")
           .val('')
@@ -142,7 +144,7 @@ function addNFSRow() {
     .append(descriptionInput('server files'))
     .append(regionSelect)
     .append($("<td>")
-      .addClass("base-image")
+      .data('type', 'storage-class')
       .append($("<select>")
         .append($("<option>")
           .attr("value", "Flash")
@@ -169,7 +171,7 @@ function addBlockRow() {
     .append(descriptionInput('cluster store'))
     .append(regionSelect)
     .append($("<td>")
-      .addClass("base-image")
+      .data('type', 'storage-class')
       .append($("<select>")
         .append($("<option>")
           .attr("value", "Flash")
@@ -196,7 +198,7 @@ function addObjectRow() {
     .append(descriptionInput('images'))
     .append(regionSelect)
     .append($("<td>")
-      .addClass("base-image")
+      .data('type', 'storage-class')
       .append($("<select>")
         .append($("<option>")
           .attr("value", "SATA")
@@ -228,9 +230,9 @@ function addPostgreSQLRow() {
     .append(removeButton)
     .append(descriptionInput('app db'))
     .append(regionSelect)
-    .append(instancesInput)
+    .append(quantityInput)
     .append($("<td>")
-      .addClass("versions")
+      .data('type', 'version')
       .append($("<select>")
         .append($("<option>")
           .val('')
@@ -272,9 +274,9 @@ function addMSSQLRow() {
     .append(removeButton)
     .append(descriptionInput('app db'))
     .append(regionSelect)
-    .append(instancesInput)
+    .append(quantityInput)
     .append($("<td>")
-      .addClass("versions")
+      .data('type', 'version')
       .append($("<select>")
         .append($("<option>")
           .val('')
@@ -316,9 +318,9 @@ function addCouchbaseRow() {
     .append(removeButton)
     .append(descriptionInput('app db'))
     .append(regionSelect)
-    .append(instancesInput)
+    .append(quantityInput)
     .append($("<td>")
-      .addClass("versions")
+      .data('type', 'version')
       .append($("<select>")
         .append($("<option>")
           .attr("selected", "selected")
@@ -341,6 +343,81 @@ function addCouchbaseRow() {
   return true;
 }
 
+function setTdValue() {
+  const closestTd = $(this).closest('td');
+  ($(this).attr("type") === 'checkbox') ? closestTd.data('value', $(this).is(':checked')): closestTd.data('value', $(this).val());
+
+  return calculateRowCost(closestTd.closest('tr'));
+}
+
+function calculateRowCost(row) {
+  const children = row.children();
+
+  if (validateComputeInput(children)) {
+
+    const perCPUPrice = 1.12;
+    const perGBStoragePrice = .09;
+    const replicationPrice = 15;
+    const backupGBPrice = .045;
+    const windowsPrice = 50;
+    const linuxPrice = 40;
+
+    const quantity = parseFloat($(children[3]).data('value'));
+    console.log(`quantity: ${quantity}`);
+    const os = $(children[4]).data('value');
+    console.log(`os: ${os}`);
+    const vcpu = parseFloat($(children[5]).data('value'));
+    console.log(`vcpu: ${vcpu}`);
+    const ram = parseFloat($(children[6]).data('value'));
+    console.log(`ram: ${ram}`);
+    const localStorage = parseFloat($(children[7]).data('value'));
+    console.log(`localStorage: ${localStorage}`);
+    const replication = $.parseJSON($(children[8]).data('value'));
+    console.log(`replication: ${replication}`);
+    const backup = $.parseJSON($(children[9]).data('value'));
+    console.log(`backup: ${backup}`);
+
+    // Each CPU comes with 4GB RAM.  If more than 4 is used the cost of additional CPUs is added
+    const computeAllocation = (Math.ceil(ram / 4) > vcpu) ? Math.ceil(ram / 4) : vcpu;
+    console.log(`ComputeAllocation: ${computeAllocation}`)
+
+    const computeCost = computeAllocation * perCPUPrice
+    console.log(`compute cost: ${computeCost}`);
+    const storageCost = localStorage * perGBStoragePrice;
+    console.log(`storage cost: ${storageCost}`);
+    const replicationCost = (replication) ? ((storageCost * 1.1) * 2) + replicationPrice : 0;
+    console.log(`replication cost: ${replicationCost}`);
+    const backupCost = (backup) ? (localStorage * 1.1) * backupGBPrice : 0;
+    console.log(`backup cost: ${backupCost}`);
+    const osCost = (os === 'Windows') ? windowsPrice : linuxPrice;
+    console.log(`os cost: ${osCost}`);
+
+    const totalCost = parseFloat(quantity * (computeCost + osCost + storageCost + replicationCost + backupCost)).toFixed(2);
+    $(children[10]).text(totalCost);
+    return updateTotalCost();
+  }
+}
+
+function updateTotalCost() {
+  let monthlyCost = 0;
+  const activeRows = $('tbody').children();
+  [...activeRows].forEach(function (elem) {
+    monthlyCost += parseFloat($(elem).children().last().text());
+  })
+  $("#monthly-cost").text(monthlyCost.toFixed(2));
+  $("#annual-cost").text((monthlyCost * 12).toFixed(2));
+}
+
+
+function validateComputeInput(data) {
+
+  if ($(data[3]).data('value') === undefined) return false; // quantity
+  if ($(data[4]).data('value') === undefined) return false; // OS
+  if ($(data[5]).data('value') === undefined) return false; // vCPU
+  if ($(data[6]).data('value') === undefined) return false; // RAM
+  if ($(data[7]).data('value') === undefined) return false; // Local Storage
+  return true;
+}
 
 function addRowToBody(elem, row) {
   return elem.closest('tr')
@@ -356,6 +433,7 @@ function deleteRow() {
 
 function removeButton() {
   return $("<td>")
+    .data('type', 'button')
     .append($("<div>")
       .addClass("valign-wrapper")
       .append($("<i>")
@@ -366,7 +444,7 @@ function removeButton() {
 
 function descriptionInput(desc) {
   return $("<td>")
-    .addClass("description")
+    .data('type', 'description')
     .append($("<input>")
       .attr("placeholder", desc)
       .attr("type", "text")
@@ -375,7 +453,7 @@ function descriptionInput(desc) {
 
 function regionSelect() {
   return $("<td>")
-    .addClass("region")
+    .data('type', 'region')
     .append($("<select>")
       .append($("<option>")
         .val('')
@@ -402,9 +480,9 @@ function regionSelect() {
     )
 }
 
-function instancesInput() {
+function quantityInput() {
   return $("<td>")
-    .addClass("instances")
+    .data('type', 'quantity')
     .append($("<input>")
       .addClass("validate")
       .attr("placeholder", "")
@@ -414,7 +492,7 @@ function instancesInput() {
 
 function vcpuInput() {
   return $("<td>")
-    .addClass("vcpu")
+    .data('type', 'vcpu')
     .append($("<input>")
       .addClass("validate")
       .attr("placeholder", "")
@@ -424,7 +502,7 @@ function vcpuInput() {
 
 function ramInput() {
   return $("<td>")
-    .addClass("ram")
+    .data('type', 'ram')
     .append($("<input>")
       .addClass("validate")
       .attr("placeholder", "GB")
@@ -434,7 +512,7 @@ function ramInput() {
 
 function localStorageInput() {
   return $("<td>")
-    .addClass("local-storage")
+    .data('type', 'local-storage')
     .append($("<input>")
       .addClass("validate")
       .attr("placeholder", "GB")
@@ -444,7 +522,7 @@ function localStorageInput() {
 
 function sizeInput() {
   return $("<td>")
-    .addClass("size")
+    .data('type', 'size')
     .append($("<input>")
       .addClass("validate")
       .attr("placeholder", "GB")
@@ -454,7 +532,9 @@ function sizeInput() {
 
 function replicationCheckbox() {
   return $("<td>")
-    .addClass("replication center-align")
+    .data('type', 'replication')
+    .data('value', 'false')
+    .addClass("center-align")
     .append($("<label>")
       .append($("<input>")
         .attr("type", "checkbox")
@@ -465,7 +545,9 @@ function replicationCheckbox() {
 
 function backupCheckbox() {
   return $("<td>")
-    .addClass("backup center-align")
+    .data('type', 'backup')
+    .data('value', 'false')
+    .addClass("center-align")
     .append($("<label>")
       .append($("<input>")
         .attr("type", "checkbox")
@@ -476,6 +558,7 @@ function backupCheckbox() {
 
 function monthlyBillingOutput() {
   return $("<td>")
-    .addClass("monthly-billing money")
+    .data('type', 'billing')
+    .addClass("money")
     .text("0")
 }
