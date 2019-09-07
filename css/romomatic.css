@@ -1,3 +1,7 @@
-.table-footer {
+.no-border {
     border: 0;
+}
+
+.money::before {
+    content: "$";
 }

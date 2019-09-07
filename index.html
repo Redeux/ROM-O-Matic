@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title></title>
+  <title>SWAG-O-MATIC</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -30,509 +30,299 @@
   <!-- Add your site or application content here -->
   <div class="container">
     <div class="row">
+      <div class="col s6 center-align">
+        <h2>Monthly Cost</h2>
+        <h3 class="money" id="monthly-cost">0</h3>
+      </div>
+      <div class="col s6 center-align">
+        <h2>Annual Cost</h2>
+        <h3 class="money" id="annual-cost">0</h3>
+      </div>
+    </div>
+    <div class="row">
       <table>
         <caption class="left-align">Compute: Intel VM Instances:</caption>
-        <tr>
-          <th>Description</th>
-          <th>Region</th>
-          <th>Instances</th>
-          <th>OS</th>
-          <th>vCPU</th>
-          <th>RAM</th>
-          <th>Local Storage</th>
-          <th>Replication</th>
-          <th>Backup</th>
-          <th>Monthly Billing</th>
-        </tr>
-        <tbody>
+        <thead>
           <tr>
-            <td class="description"><input placeholder="frontend" type="text"></td>
-            <td class="region">
-              <select>
-                <option value="" disabled selected>Choose one</option>
-                <option value="Dev">Dev</option>
-                <option value="PStage">Pstage</option>
-                <option value="PS2">PS2</option>
-                <option value="Production">Production</option>
-              </select>
-            </td>
-            <td class="instances"><input placeholder="" type="number" class="validate"></td>
-            <td class="operating-system">
-              <select>
-                <option value="" disabled selected>Choose one</option>
-                <option value="Linux">Linux</option>
-                <option value="Windows">Windows</option>
-                <option value="Appliance">Appliance</option>
-              </select>
-            </td>
-            <td class="vcpu"><input placeholder="" type="number" class="validate"></td>
-            <td class="ram"><input placeholder="GB" type="number" class="validate"></td>
-            <td class="local-storage"><input placeholder="GB" type="number" class="validate"></td>
-            <td class="replication center-align"><label><input type="checkbox"><span></span></label></td>
-            <td class="backup center-align"><label><input type="checkbox"><span></span></label></td>
-            <td class="monthly-billing">$420</td>
+            <th></th>
+            <th>Description</th>
+            <th>Region</th>
+            <th>Instances</th>
+            <th>OS</th>
+            <th>vCPU</th>
+            <th>RAM</th>
+            <th>Local Storage</th>
+            <th>Replication</th>
+            <th>Backup</th>
+            <th>Monthly Billing</th>
           </tr>
-          <tr class="table-footer">
+        </thead>
+        <tbody>
+        </tbody>
+        <tfoot>
+          <tr class="no-border">
             <td>
               <div class="valign-wrapper">
-                <i class="small material-icons green-text text-darken-2 new-row">add_circle</i>Add new row
+                <i class="small material-icons green-text text-darken-2" id="IntelVM-add-button">add_circle</i>
               </div>
             </td>
+            <td>Add new row</td>
           </tr>
-        </tbody>
+        </tfoot>
       </table>
     </div>
 
     <div class="row">
       <table>
         <caption class="left-align">Compute: Power VM Instances:</caption>
-        <tr>
-          <th>Description</th>
-          <th>Region</th>
-          <th>Instances</th>
-          <th>OS</th>
-          <th>vCPU</th>
-          <th>RAM</th>
-          <th>Local Storage</th>
-          <th>Replication</th>
-          <th>Backup</th>
-          <th>Monthly Billing</th>
-        </tr>
-        <tbody>
+        <thead>
           <tr>
-            <td class="description"><input placeholder="frontend" type="text"></td>
-            <td class="region">
-              <select>
-                <option value="" disabled selected>Choose one</option>
-                <option value="Dev">Dev</option>
-                <option value="PStage">Pstage</option>
-                <option value="PS2">PS2</option>
-                <option value="Production">Production</option>
-              </select>
-            </td>
-            <td class="instances"><input placeholder="" type="number" class="validate"></td>
-            <td class="operating-system">
-              <select>
-                <option value="" disabled selected>Choose one</option>
-                <option value="Linux">AIX</option>
-                <option value="Windows" disabled>Linux</option>
-              </select>
-            </td>
-            <td class="vcpu"><input placeholder="" type="number" class="validate"></td>
-            <td class="ram"><input placeholder="GB" type="number" class="validate"></td>
-            <td class="local-storage"><input placeholder="GB" type="number" class="validate"></td>
-            <td class="replication center-align"><label><input type="checkbox"><span></span></label></td>
-            <td class="backup center-align"><label><input type="checkbox"><span></span></label></td>
-            <td class="monthly-billing">$420</td>
+            <th></th>
+            <th>Description</th>
+            <th>Region</th>
+            <th>Instances</th>
+            <th>OS</th>
+            <th>vCPU</th>
+            <th>RAM</th>
+            <th>Local Storage</th>
+            <th>Replication</th>
+            <th>Backup</th>
+            <th>Monthly Billing</th>
           </tr>
-          <tr class="table-footer">
+        </thead>
+        <tbody>
+        </tbody>
+        <tfoot>
+          <tr class="table-footer no-border">
             <td>
               <div class="valign-wrapper">
-                <i class="small material-icons green-text text-darken-2 new-row">add_circle</i>Add new row
+                <i class="small material-icons green-text text-darken-2" id="PowerVM-add-button">add_circle</i>
               </div>
             </td>
+            <td>Add new row</td>
           </tr>
-        </tbody>
+        </tfoot>
       </table>
     </div>
 
     <div class="row">
       <table>
         <caption class="left-align">Compute: Container Instances:</caption>
-        <tr>
-          <th>Description</th>
-          <th>Instances</th>
-          <th>Base Image</th>
-          <th>vCPU</th>
-          <th>RAM</th>
-          <th>Local Storage</th>
-          <th>Monthly Billing</th>
-        </tr>
+        <thead>
+          <tr>
+            <th></th>
+            <th>Description</th>
+            <th>Region</th>
+            <th>Instances</th>
+            <th>Base Image</th>
+            <th>vCPU</th>
+            <th>RAM</th>
+            <th>Local Storage</th>
+            <th>Replication</th>
+            <th>Backup</th>
+            <th>Monthly Billing</th>
+          </tr>
+        </thead>
         <tbody>
-          <tr class="table-footer">
+        </tbody>
+        <tfoot>
+          <tr class="table-footer no-border">
             <td>
               <div class="valign-wrapper">
-                <i class="small material-icons green-text text-darken-2 new-row">add_circle</i>Add new row
+                <i class="small material-icons green-text text-darken-2" id="Container-add-button">add_circle</i>
               </div>
             </td>
+            <td>Add new row</td>
           </tr>
-        </tbody>
+        </tfoot>
       </table>
     </div>
 
     <div class="row">
       <table>
         <caption class="left-align">Storage: NFS:</caption>
-        <tr>
-          <th>Description</th>
-          <th>Storage Class</th>
-          <th>Size</th>
-          <th>Replication</th>
-          <th>Backup</th>
-          <th>Monthly Billing</th>
-        </tr>
-        <tbody>
+        <thead>
           <tr>
-            <td class="description"><input placeholder="shared files" type="text"></td>
-            <td class="storage-class">
-              <select>
-                <option value="" selected>Flash</option>
-              </select>
-            </td>
-            <td class="size"><input placeholder="GB" type="number" class="validate"></td>
-            <td class="replication center-align"><label><input type="checkbox"><span></span></label></td>
-            <td class="backup center-align"><label><input type="checkbox"><span></span></label></td>
-            <td class="monthly-billing">$420</td>
+            <th></th>
+            <th>Description</th>
+            <th>Region</th>
+            <th>Storage Class</th>
+            <th>Size</th>
+            <th>Replication</th>
+            <th>Backup</th>
+            <th>Monthly Billing</th>
           </tr>
-          <tr class="table-footer">
+        </thead>
+        <tbody>
+        </tbody>
+        <tfoot>
+          <tr class="table-footer no-border">
             <td>
               <div class="valign-wrapper">
-                <i class="small material-icons green-text text-darken-2 new-row">add_circle</i>Add new row
+                <i class="small material-icons green-text text-darken-2" id="NFS-add-button">add_circle</i>
               </div>
             </td>
+            <td>Add new row</td>
           </tr>
-        </tbody>
+        </tfoot>
       </table>
     </div>
 
     <div class="row">
       <table>
         <caption class="left-align">Storage: Block:</caption>
-        <tr>
-          <th>Description</th>
-          <th>Storage Class</th>
-          <th>Size</th>
-          <th>Replication</th>
-          <th>Backup</th>
-          <th>Monthly Billing</th>
-        </tr>
-        <tbody>
+        <thead>
           <tr>
-            <td class="description"><input placeholder="cluster shared" type="text"></td>
-            <td class="storage-class">
-              <select>
-                <option value="" selected>Flash</option>
-              </select>
-            </td>
-            <td class="size"><input placeholder="GB" type="number" class="validate"></td>
-            <td class="replication center-align"><label><input type="checkbox"><span></span></label></td>
-            <td class="backup center-align"><label><input type="checkbox"><span></span></label></td>
-            <td class="monthly-billing">$420</td>
+            <th></th>
+            <th>Description</th>
+            <th>Region</th>
+            <th>Storage Class</th>
+            <th>Size</th>
+            <th>Replication</th>
+            <th>Backup</th>
+            <th>Monthly Billing</th>
           </tr>
-          <tr class="table-footer">
+        </thead>
+        <tbody>
+        </tbody>
+        <tfoot>
+          <tr class="table-footer no-border">
             <td>
               <div class="valign-wrapper">
-                <i class="small material-icons green-text text-darken-2 new-row">add_circle</i>Add new row
+                <i class="small material-icons green-text text-darken-2" id="Block-add-button">add_circle</i>
               </div>
             </td>
+            <td>Add new row</td>
           </tr>
-        </tbody>
+        </tfoot>
       </table>
     </div>
 
     <div class="row">
       <table>
         <caption class="left-align">Storage: Object:</caption>
-        <tr>
-          <th>Description</th>
-          <th>Storage Class</th>
-          <th>Size</th>
-          <th>Replication</th>
-          <th>Backup</th>
-          <th>Monthly Billing</th>
-        </tr>
-        <tbody>
+        <thead>
           <tr>
-            <td class="description"><input placeholder="videos" type="text"></td>
-            <td class="storage-class">
-              <select>
-                <option value="" disabled selected>Choose one</option>
-                <option value="SATA">SATA</option>
-                <option value="Flash" disabled>Flash</option>
-              </select>
-            </td>
-            <td class="size"><input placeholder="GB" type="number" class="validate"></td>
-            <td class="replication center-align"><label><input type="checkbox"><span></span></label></td>
-            <td class="backup center-align"><label><input type="checkbox"><span></span></label></td>
-            <td class="monthly-billing">$420</td>
+            <th></th>
+            <th>Description</th>
+            <th>Region</th>
+            <th>Storage Class</th>
+            <th>Size</th>
+            <th>Replication</th>
+            <th>Backup</th>
+            <th>Monthly Billing</th>
           </tr>
-          <tr class="table-footer">
+        </thead>
+        <tbody>
+        </tbody>
+        <tfoot>
+          <tr class="table-footer no-border">
             <td>
               <div class="valign-wrapper">
-                <i class="small material-icons green-text text-darken-2 new-row">add_circle</i>Add new row
+                <i class="small material-icons green-text text-darken-2" id="Object-add-button">add_circle</i>
               </div>
             </td>
+            <td>Add new row</td>
           </tr>
-        </tbody>
+        </tfoot>
       </table>
     </div>
 
     <div class="row">
       <table>
-        <caption class="left-align">Database: Postgres:</caption>
-        <tr>
-          <th>Description</th>
-          <th>Region</th>
-          <th>Instances</th>
-          <th>Engine</th>
-          <th>vCPU</th>
-          <th>RAM</th>
-          <th>Local Storage</th>
-          <th>Replication</th>
-          <th>Backup</th>
-          <th>Monthly Billing</th>
-        </tr>
-        <tbody>
+        <caption class="left-align">Database: PostgreSQL:</caption>
+        <thead>
           <tr>
-            <td class="description"><input placeholder="app db" type="text"></td>
-            <td class="region">
-              <select>
-                <option value="" disabled selected>Choose one</option>
-                <option value="Dev">Dev</option>
-                <option value="PStage">Pstage</option>
-                <option value="PS2">PS2</option>
-                <option value="Production">Production</option>
-              </select>
-            </td>
-            <td class="instances"><input placeholder="" type="number" class="validate"></td>
-            <td class="operating-system">
-              <select>
-                <option value="" disabled selected>Choose one</option>
-                <option value="9.x">9.x</option>
-                <option value="10.x">10.x</option>
-                <option value="11.x">11.x</option>
-              </select>
-            </td>
-            <td class="vcpu"><input placeholder="" type="number" class="validate"></td>
-            <td class="ram"><input placeholder="GB" type="number" class="validate"></td>
-            <td class="local-storage"><input placeholder="GB" type="number" class="validate"></td>
-            <td class="replication center-align"><label><input type="checkbox"><span></span></label></td>
-            <td class="backup center-align"><label><input type="checkbox"><span></span></label></td>
-            <td class="monthly-billing">$420</td>
+            <th></th>
+            <th>Description</th>
+            <th>Region</th>
+            <th>Instances</th>
+            <th>Version</th>
+            <th>vCPU</th>
+            <th>RAM</th>
+            <th>Local Storage</th>
+            <th>Replication</th>
+            <th>Backup</th>
+            <th>Monthly Billing</th>
           </tr>
-          <tr class="table-footer">
+        </thead>
+        <tbody>
+        </tbody>
+        <tfoot>
+          <tr class="table-footer no-border">
             <td>
               <div class="valign-wrapper">
-                <i class="small material-icons green-text text-darken-2 new-row">add_circle</i>Add new row
+                <i class="small material-icons green-text text-darken-2" id="PostgreSQL-add-button">add_circle</i>
               </div>
             </td>
+            <td>Add new row</td>
           </tr>
-        </tbody>
+        </tfoot>
       </table>
     </div>
 
     <div class="row">
       <table>
-        <caption class="left-align">Database: MSSQL:</caption>
-        <tr>
-          <th>Description</th>
-          <th>Region</th>
-          <th>Instances</th>
-          <th>Engine</th>
-          <th>vCPU</th>
-          <th>RAM</th>
-          <th>Local Storage</th>
-          <th>Replication</th>
-          <th>Backup</th>
-          <th>Monthly Billing</th>
-        </tr>
-        <tbody>
+        <caption class="left-align">Database: Microsoft SQL Server:</caption>
+        <thead>
           <tr>
-            <td class="description"><input placeholder="app db" type="text"></td>
-            <td class="region">
-              <select>
-                <option value="" disabled selected>Choose one</option>
-                <option value="Dev">Dev</option>
-                <option value="PStage">Pstage</option>
-                <option value="PS2">PS2</option>
-                <option value="Production">Production</option>
-              </select>
-            </td>
-            <td class="instances"><input placeholder="" type="number" class="validate"></td>
-            <td class="operating-system">
-              <select>
-                <option value="" disabled selected>Choose one</option>
-                <option value="2016">2016</option>
-                <option value="2017">2017</option>
-                <option value="2019" disabled>2019</option>
-              </select>
-            </td>
-            <td class="vcpu"><input placeholder="" type="number" class="validate"></td>
-            <td class="ram"><input placeholder="GB" type="number" class="validate"></td>
-            <td class="local-storage"><input placeholder="GB" type="number" class="validate"></td>
-            <td class="replication center-align"><label><input type="checkbox"><span></span></label></td>
-            <td class="backup center-align"><label><input type="checkbox"><span></span></label></td>
-            <td class="monthly-billing">$420</td>
+            <th></th>
+            <th>Description</th>
+            <th>Region</th>
+            <th>Instances</th>
+            <th>Version</th>
+            <th>vCPU</th>
+            <th>RAM</th>
+            <th>Local Storage</th>
+            <th>Replication</th>
+            <th>Backup</th>
+            <th>Monthly Billing</th>
           </tr>
-          <tr class="table-footer">
+        </thead>
+        <tbody>
+        </tbody>
+        <tfoot>
+          <tr class="table-footer no-border">
             <td>
               <div class="valign-wrapper">
-                <i class="small material-icons green-text text-darken-2 new-row">add_circle</i>Add new row
+                <i class="small material-icons green-text text-darken-2" id="MSSQL-add-button">add_circle</i>
               </div>
             </td>
+            <td>Add new row</td>
           </tr>
-        </tbody>
+        </tfoot>
       </table>
     </div>
 
     <div class="row">
       <table>
-        <caption class="left-align">Database: NoSQL:</caption>
-        <tr>
-          <th>Description</th>
-          <th>Region</th>
-          <th>Instances</th>
-          <th>Engine</th>
-          <th>vCPU</th>
-          <th>RAM</th>
-          <th>Local Storage</th>
-          <th>Replication</th>
-          <th>Backup</th>
-          <th>Monthly Billing</th>
-        </tr>
-        <tbody>
+        <caption class="left-align">Database: Couchbase:</caption>
+        <thead>
           <tr>
-            <td class="description"><input placeholder="app db" type="text"></td>
-            <td class="region">
-              <select>
-                <option value="" disabled selected>Choose one</option>
-                <option value="Dev">Dev</option>
-                <option value="PStage">Pstage</option>
-                <option value="PS2">PS2</option>
-                <option value="Production">Production</option>
-              </select>
-            </td>
-            <td class="instances"><input placeholder="" type="number" class="validate"></td>
-            <td class="operating-system">
-              <select>
-                <option value="" disabled selected>Choose one</option>
-                <option value="9.x">9.x</option>
-                <option value="10.x">10.x</option>
-                <option value="11.x">11.x</option>
-              </select>
-            </td>
-            <td class="vcpu"><input placeholder="" type="number" class="validate"></td>
-            <td class="ram"><input placeholder="GB" type="number" class="validate"></td>
-            <td class="local-storage"><input placeholder="GB" type="number" class="validate"></td>
-            <td class="replication center-align"><label><input type="checkbox"><span></span></label></td>
-            <td class="backup center-align"><label><input type="checkbox"><span></span></label></td>
-            <td class="monthly-billing">$420</td>
+            <th></th>
+            <th>Description</th>
+            <th>Region</th>
+            <th>Instances</th>
+            <th>Version</th>
+            <th>vCPU</th>
+            <th>RAM</th>
+            <th>Local Storage</th>
+            <th>Replication</th>
+            <th>Backup</th>
+            <th>Monthly Billing</th>
           </tr>
-          <tr class="table-footer">
+        </thead>
+        <tbody>
+        <tfoot>
+          <tr class="table-footer no-border">
             <td>
               <div class="valign-wrapper">
-                <i class="small material-icons green-text text-darken-2 new-row">add_circle</i>Add new row
+                <i class="small material-icons green-text text-darken-2" id="Couchbase-add-button">add_circle</i>
               </div>
             </td>
+            <td>Add new row</td>
           </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="row">
-      <table>
-        <caption class="left-align">Database: Oracle:</caption>
-        <tr>
-          <th>Description</th>
-          <th>Region</th>
-          <th>Instances</th>
-          <th>Engine</th>
-          <th>vCPU</th>
-          <th>RAM</th>
-          <th>Local Storage</th>
-          <th>Replication</th>
-          <th>Backup</th>
-          <th>Monthly Billing</th>
-        </tr>
-        <tbody>
-          <tr>
-            <td class="description"><input placeholder="app db" type="text"></td>
-            <td class="region">
-              <select>
-                <option value="" disabled selected>Choose one</option>
-                <option value="Dev">Dev</option>
-                <option value="PStage">Pstage</option>
-                <option value="PS2">PS2</option>
-                <option value="Production">Production</option>
-              </select>
-            </td>
-            <td class="instances"><input placeholder="" type="number" class="validate"></td>
-            <td class="operating-system">
-              <select>
-                <option value="" disabled selected>Choose one</option>
-                <option value="12.2">12.2</option>
-                <option value="18.1">18.1</option>
-                <option value="19" disabled>19</option>
-              </select>
-            </td>
-            <td class="vcpu"><input placeholder="" type="number" class="validate"></td>
-            <td class="ram"><input placeholder="GB" type="number" class="validate"></td>
-            <td class="local-storage"><input placeholder="GB" type="number" class="validate"></td>
-            <td class="replication center-align"><label><input type="checkbox"><span></span></label></td>
-            <td class="backup center-align"><label><input type="checkbox"><span></span></label></td>
-            <td class="monthly-billing">$420</td>
-          </tr>
-          <tr class="table-footer">
-            <td>
-              <div class="valign-wrapper">
-                <i class="small material-icons green-text text-darken-2 new-row">add_circle</i>Add new row
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="row">
-      <table>
-        <caption class="left-align">Database: DB2:</caption>
-        <tr>
-          <th>Description</th>
-          <th>Region</th>
-          <th>Instances</th>
-          <th>Engine</th>
-          <th>vCPU</th>
-          <th>RAM</th>
-          <th>Local Storage</th>
-          <th>Replication</th>
-          <th>Backup</th>
-          <th>Monthly Billing</th>
-        </tr>
-        <tbody>
-          <tr>
-            <td class="description"><input placeholder="app db" type="text"></td>
-            <td class="region">
-              <select>
-                <option value="" disabled selected>Choose one</option>
-                <option value="Dev">Dev</option>
-                <option value="PStage">Pstage</option>
-                <option value="PS2">PS2</option>
-                <option value="Production">Production</option>
-              </select>
-            </td>
-            <td class="instances"><input placeholder="" type="number" class="validate"></td>
-            <td class="operating-system">
-              <select>
-                <option value="" disabled selected>Choose one</option>
-                <option value="9.x">9.x</option>
-                <option value="10.x">10.x</option>
-                <option value="11.x">11.x</option>
-              </select>
-            </td>
-            <td class="vcpu"><input placeholder="" type="number" class="validate"></td>
-            <td class="ram"><input placeholder="GB" type="number" class="validate"></td>
-            <td class="local-storage"><input placeholder="GB" type="number" class="validate"></td>
-            <td class="replication center-align"><label><input type="checkbox"><span></span></label></td>
-            <td class="backup center-align"><label><input type="checkbox"><span></span></label></td>
-            <td class="monthly-billing">$420</td>
-          </tr>
-          <tr class="table-footer">
-            <td>
-              <div class="valign-wrapper">
-                <i class="small material-icons green-text text-darken-2 new-row">add_circle</i>Add new row
-              </div>
-            </td>
-          </tr>
+        </tfoot>
         </tbody>
       </table>
     </div>
